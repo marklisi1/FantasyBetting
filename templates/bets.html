@@ -4,7 +4,17 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Welcome, {{ username }}!</h1>
+    <h1>Welcome to the betting page!</h1>
+
+    {% if games %}
+        <p>Basketball Moneyline Bets:</p>
+        {% for game in games %}
+            <li>{{ game }}</li>
+        {% endfor %}
+    
+    {% else %}
+        <p>Failed to fetch data from the API.</p>
+    {% endif %}
     
     <button id="apiButton">Make API Call</button>
 
