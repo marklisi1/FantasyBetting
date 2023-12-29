@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome, {{ username }}!</h1>
+    
+    <button id="apiButton">Make API Call</button>
+
+    <script>
+        document.getElementById('apiButton').addEventListener('click', function() {
+            // Handle button click here
+            makeApiCall();
+        });
+
+        function makeApiCall() {
+            // Use fetch to make the API call
+            fetch('/api-endpoint')
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the API response data
+                    console.log('API Response:', data);
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
