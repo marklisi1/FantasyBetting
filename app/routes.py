@@ -1,10 +1,10 @@
-from flask import Flask, render_template
-import datetime
+from flask import render_template, redirect, url_for, flash
+from flask_login import login_user, login_required, logout_user, current_user
+from app import app, db
+from app.models import User
+from app.forms import RegistrationForm, LoginForm
 import requests
-from dotenv import load_dotenv
 import os
-
-app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -28,6 +28,3 @@ def bets():
         games.append(game['bookmakers'][0]['markets'][0]['outcomes'])
 
     return render_template('bets.html', games=games)
-
-if __name__ == '__main__':
-    app.run(debug=True)
