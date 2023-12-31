@@ -32,7 +32,7 @@ def bets():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-
+    print(form.validate_on_submit())
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -41,6 +41,6 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         print('yeeeeup')
-        return redirect(url_for('index'))
+        return redirect('/')
 
     return render_template('register.html', form=form)
