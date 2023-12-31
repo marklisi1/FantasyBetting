@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Flask App</title>
+    <title>Fantasy Betting</title>
 </head>
 <body>
-    <h1>Hello, Flask!</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/bets">Bets</a>
+        <a href="/register">Register</a>
+        <a href="/">Contact</a>
+    </nav>
+    <h1>Welcome Fellow Degens</h1>
+    {% if current_user.is_authenticated %}
+    <p>Hello, {{ current_user.username }}! </p>
+    {% else %}
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            {{ form.username.label }} {{ form.username() }}<br>
+            {{ form.password.label }} {{ form.password() }}<br>
+            {{ form.submit() }}
+        </form>
+    {% endif %}
 </body>
 </html>

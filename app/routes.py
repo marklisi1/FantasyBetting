@@ -1,14 +1,19 @@
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user, current_user
-from app import app, db
+from app import app, db, login_manager
 from app.models import User
 from app.forms import RegistrationForm, LoginForm
 import requests
 import os
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 @app.route('/')
 def home():
-    return render_template('index.html')
+    form = LoginForm()
+    return render_template('index.html', form=form)
 
 @app.route('/bets')
 def bets():
@@ -32,7 +37,7 @@ def bets():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    print(form.validate_on_submit())
+
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -40,7 +45,6 @@ def register():
         new_user = User(username, password)
         db.session.add(new_user)
         db.session.commit()
-        print('yeeeeup')
         return redirect('/')
 
     return render_template('register.html', form=form)
