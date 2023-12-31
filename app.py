@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import datetime
 import requests
+from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ def bets():
     odds_response = requests.get(
     'https://api.the-odds-api.com/v4/sports/basketball_nba/odds',
     params={
-        'api_key': '9bbb3bda82ce604880f9160ed6b6497c',
+        'api_key': os.getenv("API_KEY"),
         'regions': 'us',
         'markets': 'h2h',
         'oddsFormat': 'decimal',
