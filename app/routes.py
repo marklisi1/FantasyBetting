@@ -28,3 +28,19 @@ def bets():
         games.append(game['bookmakers'][0]['markets'][0]['outcomes'])
 
     return render_template('bets.html', games=games)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+
+        new_user = User(username, password)
+        db.session.add(new_user)
+        db.session.commit()
+        print('yeeeeup')
+        return redirect(url_for('index'))
+
+    return render_template('register.html', form=form)
