@@ -25,12 +25,7 @@ def bets():
 
     games = []
     for game in odds_response.json():
-        home_team = game['bookmakers'][0]['markets'][0]['outcomes'][0]['name']
-        home_odds = game['bookmakers'][0]['markets'][0]['outcomes'][0]['price']
-        away_team = game['bookmakers'][0]['markets'][0]['outcomes'][1]['name']
-        away_odds = game['bookmakers'][0]['markets'][0]['outcomes'][1]['price']
-        games.append(f'{home_team} ({home_odds}) versus {away_team} ({away_odds})')
-
+        games.append(game['bookmakers'][0]['markets'][0]['outcomes'])
 
     return render_template('bets.html', games=games)
 

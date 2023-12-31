@@ -9,7 +9,10 @@
     {% if games %}
         <p>Basketball Moneyline Bets:</p>
         {% for game in games %}
-            <li>{{ game }}</li>
+            <li>
+                <a href="#">{{ game[0]['name'] }} ({{ game[0]['price'] }})</a> VS 
+                <span><a href='#'>{{ game[1]['name'] }} ({{game[1]['price']}})</a></span>
+            </li>
         {% endfor %}
     
     {% else %}
